@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="ajax/jquery-1.12.4.min.js"></script>
+        
+        <title>GPA Calculator v1.5</title>
+        
+        <style>
+            .form{
+                float: left;
+                margin-left: 10px;
+                padding-right: 35px;
+            }
+            
+            .hints{
+                position: static;
+                padding-top: 0px;
+                margin-right: 10px;
+                margin-left: 10px;
+                padding-left: 30px;
+            }
+        </style>
+        
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+                
+                //hides the table when the page loads
+                $(".result_summary").hide();
+                $(".hints").hide();
+                $(".hints").fadeIn(2000);
+                                
+                $("#calculate").click(function(){
+                                                            
+                    //shows the tables after the click event is activated
+                    $(".result_summary").fadeIn(2000);
+                    $("table tr:even").css("background","#F0F0F0");
+                    $(".form").hide();
+                    $(".hints").hide();
+                    
+                    //defining variables
+                    var gpa = 0.0;
+                    var grade_point = new Array();
+                    var grade_weight = new Array();
+                    var overall_rem = "";
+                    var total_credits = 0;
+                    var total_gradept = 0.0;
+                    
+                    //get the total number of courses
+                    var num_courses = $("#num_courses").val();
+                    
+                    //get all grades entered(takes every single grade as an array element)
+                    var grade = $.trim($("#grades").val()).split(" ");
+                    
+                    //get all credits entered(takes every single credit as an array element)
+                    var credit = $.trim($("#credits").val()).split(" ");
+                    
+                    //computing total credits, total grade points and GPA
+                    for(var n=0; n<num_courses; n++){
+                         if(grade[n] == "A"){
+                            grade_point[n] = 5;
+                            grade_weight[n] = grade_point[n] * parseInt(credit[n]);
+                         }
+                         else if(grade[n] == "B+"){
+                            grade_point[n] = 4;
+                            grade_weight[n] = grade_point[n] * parseInt(credit[n]);
+                         }
+                         else if(grade[n] == "B"){
+                            grade_point[n] = 3;
+                            grade_weight[n] = grade_point[n] * parseInt(credit[n]);
+                         }
+                         else if(grade[n] == "C"){
+                            grade_point[n] = 2;
+                            grade_weight[n] = grade_point[n] * parseInt(credit[n]);
+                         }
+                         else if(grade[n] == "D"){
+                            grade_point[n] = 1;
+                            grade_weight[n] = grade_point[n] * parseInt(credit[n]);
+                         }
+                         else{
+                            alert("Wrong Grades!");
+                         }
+                         
+                        //sums the total grade point
+                         total_gradept += grade_weight[n];
+                        
+                        //sums the total credits
+                        total_credits += parseInt(credit[n]);
+
+                    }
+                    
+                    //computes the final GPA
+                        gpa = parseFloat(total_gradept) / total_credits;
+                    
+                    //prints the total grade points
+                    $("#total_gradept").text(total_gradept);
+                    
+                    //prints the total credits
+                    $("#total_credits").text(total_credits);
+                    
+                    //prints the gpa
+                    $("#gpa").text(gpa.toPrecision(2)); //fixed the GPA precision to 2 significant figures
+                    
+                    //prints the overall remark
+                    if(gpa>=1.8){
+                        overall_rem = "PASS";
+                        $("#overall_remarks").text(overall_rem);
+                    }else{
+                        overall_rem = "FAIL";
+                        $("#overall_remarks").text(overall_rem);
+                    }
+                    
+                    //prints all the credits and grades entered by the user
+                    $(".creds").text(credit);
+                    $(".greds").text(grade);
+                    
+                });
+                
+                $("#refresh").click(function(){
+                    location.reload(true);   
+                });
+                    
+            });
+        </script>
+    </head>
+    <body>
+        
+        <!-- Banner Here -->
+        <h2>
+            <pre>
+                +---------------------------------------------------+
+                |                                                   |
+                |            ######  #####     #                    |
+                |            #       #    #   # #                   |
+                |            # ####  #####   #####                  |
+                |            #    #  #      #     #                 |
+                |            ######  #     #       # CALCULATOR v1.5|
+                |         CODED BY ANDY KAWA - BL4CKBO7             |
+                +---------------------------------------------------+
+            </pre>
+        </h2>
+        
+        <br/><br/>
+        
+        <div class="form">
+            <label>Total Courses/Semester&nbsp;</label>
+            <input type="number" id="num_courses" required><br/><br/>
+            
+            <label>Enter your course GRADES here&nbsp;</label><br/>
+            <textarea cols="50" rows="5" id="grades" placeholder="For example: A B B+ C" required></textarea><br/><br/>
+            
+            <label>Enter your course CREDITS here&nbsp;</label><br/>
+            <textarea cols="50" rows="5" id="credits" placeholder="For example: 10 10 10 7" required></textarea><br/><br/>
+            
+            <button id="calculate">Calculate!</button>
+            
+        </div>
+        
+        <div class="hints">
+            <h3>How it works</h3>
+            <pre>
+1. Enter total number of courses, course grades you have scored & course credits for each respective course.
+2. Computes the total grade points you have earned and the total credits for all your courses
+3. Finally Computes the GPA
+
+Example:
+
+Total Courses/Semester: 7
+...course GRADES here: B+ A A A A A B+
+...course CREDITS here: 10 10 10 10 10 10 10
+
+Computation:
+
+grade weight = grade point x credit; e.g For grade 'A' ; grade weight = 10 x 10 = 100
+total grade points = total grade points + grade weight
+total credits = total credits + credit
+Finally, GPA = total grade points / total credits
+            </pre>
+        </div>
+        
+        <br/><br/>
+        
+        <div class="result_summary">
+            <h2>Results Summary</h2>
+            
+            <hr/>
+        
+            <br/>
+            
+            <h3>
+                <table border="0" cellspacing="0" cellpadding="0" width="70%">
+                    <tr>
+                        <td>Total Credits</td>
+                        <td id="total_credits"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Grade Points</td>
+                        <td id="total_gradept"></td>
+                    </tr>
+                    <tr>
+                        <td>GPA</td>
+                        <td id="gpa"></td>
+                    </tr>
+                    <tr>
+                        <td>Remarks</td>
+                        <td id="overall_remarks"></td>
+                    </tr>
+                </table>
+                
+             <br/><br/><br/><br/>
+            
+                <table border="0" cellspacing="0" cellpadding="0" width="70%">
+                    <tr>
+                        <td>Credits</td>
+                        <td class="creds"></td>
+                    </tr>
+                    <tr>
+                        <td>Grades</td>
+                        <td class="greds"></td>
+                    </tr>
+                </table>
+                
+            </h3>
+            
+            <br/>
+            
+            <hr/>
+            
+            <br/><br/>
+            
+            
+            <p><a href="#" id="refresh">Refresh</a> page to return to homepage</p>
+        </div>
+
+    </body>
+</html>
