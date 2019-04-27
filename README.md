@@ -5,7 +5,7 @@ GPA-Calculator - Helps to calculate the Grade Point Aggregate for university stu
 # Installation
 
 1) Clone this repository (https://github.com/bl4ckbo7/GPA-Calculator.git).
-2) Navigate in the folder GPA-Calculator, open the HTML file "GPA Calculator v1.5.1.html" with any browser.
+2) Navigate in the folder "GPA-Calculator", open the HTML file "GPA Calculator v1.5.1.html" with any browser.
 3) Calculate!
 
 # How it works
