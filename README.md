@@ -1,6 +1,6 @@
 # GPA-Calculator
 
-GPA-Calculator - Helps to calculate the Grade Point Aggregate for university students courses. 
+GPA-Calculator - Helps to calculate the Grade Point Aggregate for university students' courses. 
 
 # How it works
 
@@ -12,7 +12,7 @@ GPA-Calculator - Helps to calculate the Grade Point Aggregate for university stu
 
 Total Courses/Semester: 7
 
-**NB: Fill in the Grades and Credits, each its total should be equal to the total number of courses in the respective semester.**
+**NB: Fill in the Grades and Credits, each, its total should be equal to the total number of courses in the respective semester.**
 
 ...course GRADES here: B+ A A A A A B+
 
@@ -26,7 +26,9 @@ total grade points = total grade points + grade weight
 
 total credits = total credits + credit
 
-Finally, GPA = total grade points / total credits
+Finally, 
+
+GPA = total grade points / total credits
 
 **Bonus:** 
-Does necessary precision on GPA value.
+Fixs the GPA value to necessary precision.
