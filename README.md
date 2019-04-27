@@ -34,7 +34,7 @@ Total Courses/Semester: 7
   
     E = 0
 
-grade weight = grade point x credit; **e.g For grade 'A' ; grade weight = 5 x 10 = 50**
+grade weight = grade point x credit; **e.g For grade 'A' & credit 10; grade weight = 5 x 10 = 50**
 
 total grade points = total grade points + grade weight
 
