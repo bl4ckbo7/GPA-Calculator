@@ -78,6 +78,10 @@
                             grade_point[n] = 1;
                             grade_weight[n] = grade_point[n] * parseInt(credit[n]);
                          }
+                         else if(grade[n] == "E"){
+                            grade_point[n] = 0;
+                            grade_weight[n] = grade_point[n] * parseInt(credit[n]);
+                         }
                          else{
                             alert("Wrong Grades!");
                          }
